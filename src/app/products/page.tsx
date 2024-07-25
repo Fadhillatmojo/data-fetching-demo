@@ -8,6 +8,7 @@ type Product = {
 
 export default async function ProductsPage() {
 	const response = await fetch("http://localhost:3001/products");
+	// in next 14 app, without reload, the data that already fetched are saved in the cache folder, so it will not request on the api server
 	const products = await response.json();
 	return (
 		<div className="grid grid-cols-2 gap-2 p-4">
