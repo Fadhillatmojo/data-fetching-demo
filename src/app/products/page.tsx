@@ -10,7 +10,12 @@ type Product = {
 
 
 export default async function ProductsPage() {
-	const response = await fetch("http://localhost:3001/products");
+	const response = await fetch("http://localhost:3001/products", {
+		next: {
+			revalidate: 10, // revalidate ini gunanya buat menunggu berapa detik data akan di fetch kembali
+			// jadi misal di load pertama fetch1... jika dalam waktu <10 detik browser di reload, maka masih akan menggunakan data pada request memo/cache. apabila >10 detik dan browser di reload, maka akan fetch data kembali.
+		}
+	});
 	const products = await response.json();
 
 	// const cookieStore = cookies();
